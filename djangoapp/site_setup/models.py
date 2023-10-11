@@ -53,4 +53,4 @@ class SiteSetup(models.Model):
             resize_image(self.favicon, 32)
 
     def __str__(self):
-        return self.title  
+        return self.title
