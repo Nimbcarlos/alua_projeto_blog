@@ -4,7 +4,5 @@ def site_setup(request):
     setup = SiteSetup.objects.order_by('-id').first()
 
     return {
-        'site_setup': {
-            'title': setup
-        }
+        'site_setup': setup,
     }
