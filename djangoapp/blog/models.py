@@ -3,6 +3,7 @@ from utils.rands import slugify_new
 from django.contrib.auth.models import User
 from utils.images import resize_image
 from django_summernote.models import AbstractAttachment
+from django.urls import reverse
 
 # Create your models here.
 class PostAttachment(AbstractAttachment):
@@ -18,7 +19,7 @@ class PostAttachment(AbstractAttachment):
             file_changed = current_file_name != self.file.name
 
         if file_changed:
-            resize_image(self.file, 900, True, 70)
+            resize_image(self.file, 640, True, 60)
 
         return super_save
 
@@ -84,11 +85,17 @@ class Page(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+class PostManager(models.Manager):
+    def get_published(self):
+        return self.filter(is_published=True).order_by('-pk')
     
 class Post(models.Model):
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+
+    objects = PostManager()
 
     title = models.CharField(max_length=65,)
     slug = models.SlugField(
@@ -133,6 +140,11 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        if not self.is_published:
+            return reverse('blog:index')
+        return reverse('blog:post', args=(self.slug,))
 
     def save(self, *args, **kwargs):
         if not self.slug:
