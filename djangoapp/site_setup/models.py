@@ -1,6 +1,7 @@
 from django.db import models
 from utils.model_validators import validate_png
 from utils.images import resize_image
+from colorfield.fields import ColorField
 
 # Create your models here.
 class MenuLink(models.Model):
@@ -34,6 +35,30 @@ class SiteSetup(models.Model):
     show_description = models.BooleanField(default=True)
     show_pagination = models.BooleanField(default=True)
     show_footer = models.BooleanField(default=True)
+    
+    color_background = ColorField(
+        default='#ffffff',
+        verbose_name='Cor de fundo',
+    )
+    color_header = ColorField(
+        default='#9999ff',
+        verbose_name='Cor do cabeçalho',
+    )
+ 
+    color_menu = ColorField(
+        default='#ffff00',
+        verbose_name='Cor do menu',
+    )
+
+    color_footer = ColorField(
+        default='#ffffff',
+        verbose_name='Cor do rodapé',
+    )
+
+    color_font = ColorField(
+        default='#ffffff',
+        verbose_name='Cor da Fonte',
+    )
 
     favicon = models.ImageField(
         upload_to='assets/favicon/%Y/%m/',

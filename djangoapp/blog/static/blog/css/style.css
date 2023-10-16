@@ -5,7 +5,7 @@
     --_clr-gray: var(--_clr-base-hue) 10%;
   
     --clr-whitest: var(--_clr-primary) 100%;
-    --clr-white: var(--_clr-primary) 99%;
+    --clr-white: var(--_clr-primary) 97%;
     --clr-black: var(--_clr-primary) 2%;
 
     --clr-primary-ltst: var(--_clr-primary) 80%;
@@ -202,6 +202,10 @@ html,
 /* Utilities */
 .pb-base {
   padding-bottom: var(--spacing-base);
+}
+
+.mt-base {
+  margin-top: var(--spacing-base);
 }
 
 .center {

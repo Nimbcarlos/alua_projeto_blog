@@ -44,6 +44,8 @@ INSTALLED_APPS = [
 
     # Summernote
     'django_summernote',
+
+    'colorfield'
 ]
 
 MIDDLEWARE = [
